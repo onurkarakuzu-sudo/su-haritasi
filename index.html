@@ -211,6 +211,16 @@
       <div class="panel">
         <h3>Filtreler</h3>
         <div class="field">
+          <label>İl</label>
+          <select id="ilFilter">
+            <option value="">Tümü</option>
+            <option value="Afyonkarahisar">Afyonkarahisar</option>
+            <option value="Isparta">Isparta</option>
+            <option value="Konya">Konya</option>
+            <option value="Burdur">Burdur</option>
+          </select>
+        </div>
+        <div class="field">
           <label>İlçe</label>
           <select id="ilceFilter"><option value="">Tümü</option></select>
         </div>
@@ -470,7 +480,9 @@ function applyFilters(){
   const amac = amacSel.value;
   const sort = document.getElementById('sortFilter').value;
 
+  const il = document.getElementById('ilFilter').value;
   filtered = KUYU_DATA.filter(d => {
+    if (il && d.il !== il) return false;
     if (ilce && d.ilce_norm !== ilce) return false;
     if (amac && d.amac_norm !== amac) return false;
     if (q){
